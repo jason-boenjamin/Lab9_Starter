@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Step 2
-    let errorButtons = Array.from(document.querySelectorAll('#error-btns > button'));
+    let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
   
-    errorButtons.forEach((button) => {
+    errorBtns.forEach((button) => {
       button.addEventListener('click', () => {
         switch (button.textContent) {
           case 'Console Log':
