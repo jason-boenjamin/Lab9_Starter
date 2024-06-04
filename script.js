@@ -7,14 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
       try {
-        if (isNaN(firstNum) || isNaN(secondNum)) {
-          throw new Error('Input is not a number');
+          if (isNaN(firstNum) || isNaN(secondNum)) {
+            throw new Error('Input is not a number');
+          }
+          output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+        } catch (error) {
+          console.error(error);
+          if (window.TrackJS) {
+            TrackJS.track(error);
+          }
         }
-        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-      } catch (error) {
-        console.error(error);
-        TrackJS.track(error);
-      }
     });
     
     // Step 2
@@ -75,7 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Step 4 Custom error handling
     window.onerror = function (message, source, lineno, colno, error) {
       console.log('Global error caught:', message);
-      TrackJS.track(message);
+      if (window.TrackJS) {
+        TrackJS.track(message);
+      }
     };
   
     class CustomError extends Error {
