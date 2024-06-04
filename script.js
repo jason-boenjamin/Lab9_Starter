@@ -6,7 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        if (isNaN(firstNum) || isNaN(secondNum)) {
+          throw new Error('Input is not a number');
+        }
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        console.error(error);
+        TrackJS.track(error);
+      }
     });
     
     // Step 2
@@ -58,13 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.trace('This is a console trace.');
             break;
           case 'Trigger a Global Error':
-            // Step 3
-            try {
-            // Frpm instructrions
-              aintGonnaWork();
-            } catch (error) {
-              console.error('Caught a global error:', error);
-            }
+            aintGonnaWork();
             break;
         }
       });
@@ -73,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Step 4 Custom error handling
     window.onerror = function (message, source, lineno, colno, error) {
       console.log('Global error caught:', message);
+      TrackJS.track(message);
     };
   
     class CustomError extends Error {
