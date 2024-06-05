@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(error);
             if (window.TrackJS) {
                 TrackJS.track(error);
+            }finally {
+            console.log('Calculation attempt completed.');
             }
         }
     });
