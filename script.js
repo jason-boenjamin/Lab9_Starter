@@ -68,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.trace('This is a console trace.');
                     break;
                 case 'Trigger a Global Error':
-                    aintGonnaWork();
+                    let nonExistentElement = document.querySelector('#non-existent-element');
+                    nonExistentElement.click();
                     break;
             }
         });
