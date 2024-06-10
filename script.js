@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }finally {
             console.log('Calculation attempt completed.');
             }
+        } finally {
+            console.log('Calculation attempt completed.');
         }
     });
 
